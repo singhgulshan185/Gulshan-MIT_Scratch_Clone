@@ -15,37 +15,64 @@ A Scratch-like block programming interface built with React and webpack.
 ### Prerequisites
 
 - Node.js (v14 or higher recommended)
-- npm or pnpm
+- pnpm (recommended) or npm
 
 ### Installation
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/scratch-starter-project.git
-   cd scratch-starter-project
+   git clone https://github.com/singhgulshan185/testinuploadfinal.git
+   cd testinuploadfinal
    ```
 
-2. Install dependencies:
+2. Install dependencies with pnpm (recommended):
    ```
-   npm install
+   # Install pnpm if you don't have it
+   npm install -g pnpm
+   
+   # Install project dependencies
+   pnpm install
    ```
    
-   Or if using pnpm:
+   Or if using npm (may require additional troubleshooting):
    ```
-   pnpm install
+   npm install
    ```
 
 3. Start the development server:
    ```
-   npm start
+   pnpm start
    ```
    
-   Or with pnpm:
+   Or with npm:
    ```
-   pnpm start
+   npm start
    ```
 
 4. Open your browser and navigate to `http://localhost:3001`
+
+## Troubleshooting
+
+If you encounter issues with missing modules like babel-loader:
+
+1. Remove node_modules directory:
+   ```
+   rm -rf node_modules
+   ```
+   
+2. Reinstall with pnpm:
+   ```
+   pnpm install
+   ```
+
+3. If port 3001 is already in use:
+   ```
+   # Find the process using port 3001
+   lsof -i :3001
+   
+   # Kill the process (replace PID with the actual process ID)
+   kill -9 PID
+   ```
 
 ## Project Structure
 
