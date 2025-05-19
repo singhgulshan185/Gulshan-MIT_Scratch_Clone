@@ -1,55 +1,37 @@
-# Scratch Starter Project
+# MIT Scratch Clone 🎮
+🔗 **Live Demo**: [Click Here](https://gulshan-mit-scratch-clone-gulshan-singhs-projects-b3fca0ca.vercel.app/)
 
-A Scratch-like block programming interface built with React and webpack.
+A lightweight, React-based visual coding platform inspired by MIT Scratch. Built for the Juspay Frontend Challenge.
 
-## Features
 
-- Drag-and-drop block programming interface
-- Multiple sprite support
-- Visual execution of code blocks
-- Collision detection between sprites
-- Custom block types for movement, appearance, and control flow
+---
 
-## Getting Started
+## 🚀 Features
 
-### Prerequisites
+- 🧱 Drag-and-drop code blocks (Motion, Looks, Events)
+- 🐱 Multiple sprite support (Cat, Jerry, Mickey)
+- 🎬 Live animation preview with execution engine
+- ⚡ Collision-based animation triggers
+- 🎨 Beginner-friendly UI with modular components
 
-- Node.js (v14 or higher recommended)
-- pnpm (recommended) or npm
+---
 
-### Installation
+## 🛠️ Tech Stack
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/singhgulshan185/testinuploadfinal.git
-   cd testinuploadfinal
-   ```
+- ReactJS + TailwindCSS  
+- Webpack (Custom config)  
+- Vercel (Deployment)
 
-2. Install dependencies with pnpm (recommended):
-   ```
-   # Install pnpm if you don't have it
-   npm install -g pnpm
-   
-   # Install project dependencies
-   pnpm install
-   ```
-   
-   Or if using npm (may require additional troubleshooting):
-   ```
-   npm install
-   ```
+---
 
-3. Start the development server:
-   ```
-   pnpm start
-   ```
-   
-   Or with npm:
-   ```
-   npm start
-   ```
+## 📦 Getting Started
 
-4. Open your browser and navigate to `http://localhost:3001`
+```bash
+git clone https://github.com/singhgulshan185/Gulshan-MIT_Scratch_Clone.git
+cd Gulshan-MIT_Scratch_Clone
+npm install
+npm start
+```
 
 ## Troubleshooting
 
