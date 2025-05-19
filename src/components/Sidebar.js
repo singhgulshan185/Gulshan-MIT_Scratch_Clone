@@ -1,32 +1,35 @@
-import React from "react";
-import Icon from "./Icon";
+import React from 'react';
+import Block from './BlockComponent';
+import { BLOCK_CONFIGS, BLOCK_TYPES } from './BlockTypes';
 
 export default function Sidebar() {
+  const blocksByType = Object.entries(BLOCK_CONFIGS).reduce((acc, [key, config]) => {
+    if (!acc[config.type]) {
+      acc[config.type] = [];
+    }
+    acc[config.type].push({ ...config, key });
+    return acc;
+  }, {});
+
   return (
     <div className="w-60 flex-none h-full overflow-y-auto flex flex-col items-start p-2 border-r border-gray-200">
-      <div className="font-bold"> {"Events"} </div>
-      <div className="flex flex-row flex-wrap bg-yellow-500 text-white px-2 py-1 my-2 text-sm cursor-pointer">
-        {"When "}
-        <Icon name="flag" size={15} className="text-green-600 mx-2" />
-        {"clicked"}
-      </div>
-      <div className="flex flex-row flex-wrap bg-yellow-500 text-white px-2 py-1 my-2 text-sm cursor-pointer">
-        {"When this sprite clicked"}
-      </div>
-      <div className="font-bold"> {"Motion"} </div>
-      <div className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer">
-        {"Move 10 steps"}
-      </div>
-      <div className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer">
-        {"Turn "}
-        <Icon name="undo" size={15} className="text-white mx-2" />
-        {"15 degrees"}
-      </div>
-      <div className="flex flex-row flex-wrap bg-blue-500 text-white px-2 py-1 my-2 text-sm cursor-pointer">
-        {"Turn "}
-        <Icon name="redo" size={15} className="text-white mx-2" />
-        {"15 degrees"}
-      </div>
+      {Object.entries(blocksByType).map(([type, blocks]) => (
+        <div key={type} className="mb-6">
+          <h2 className="font-bold mb-2 text-gray-700 uppercase text-sm">
+            {type}
+          </h2>
+          <div className="space-y-2">
+            {blocks.map((block) => (
+              <Block
+                key={block.key}
+                id={`template-${block.key}`}
+                type={block.key}
+                params={block.params?.map(p => p.default)}
+              />
+            ))}
+        </div>
+        </div>
+      ))}
     </div>
   );
 }

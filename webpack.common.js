@@ -6,8 +6,9 @@ module.exports = {
     app: "./src/index.js",
   },
   output: {
-    // filename: "app.js",
     path: path.resolve(__dirname, "public"),
+    publicPath: '/',
+    filename: '[name].bundle.js'
   },
   module: {
     rules: [
@@ -43,7 +44,22 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.(png|jpg|jpeg|gif|svg)$/i,
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 8192 // 8kb - inline smaller images as data URLs
+          }
+        }
+      }
     ],
   },
-  plugins: [new MiniCssExtractPlugin()],
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    alias: {
+      '@assets': path.resolve(__dirname, 'src/Assets')
+    }
+  },
+  plugins: [new MiniCssExtractPlugin()]
 };
