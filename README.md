@@ -1,18 +1,42 @@
 # MIT Scratch Clone 🎮
-🔗 **Live Demo**: [Click Here](https://gulshan-mit-scratch-clone-gulshan-singhs-projects-b3fca0ca.vercel.app/)
+
+## 🌟 Live Demo
+**[👉 TRY IT NOW ON VERCEL 👈](https://gulshan-mit-scratch-clone-gulshan-singhs-projects-b3fca0ca.vercel.app/)**
+
+📹 **[Watch Demo Video](https://drive.google.com/file/d/1KRc_b02rd1FwHA6Cj0dxg-WDc99QwpFJ/view?usp=sharing)**
 
 A lightweight, React-based visual coding platform inspired by MIT Scratch. Built for the Juspay Frontend Challenge.
 
+![Project Screenshot](https://gulshan-mit-scratch-clone-gulshan-singhs-projects-b3fca0ca.vercel.app/screenshot.png)
 
 ---
 
 ## 🚀 Features
 
-- 🧱 Drag-and-drop code blocks (Motion, Looks, Events)
-- 🐱 Multiple sprite support (Cat, Jerry, Mickey)
-- 🎬 Live animation preview with execution engine
-- ⚡ Collision-based animation triggers
-- 🎨 Beginner-friendly UI with modular components
+### 🧱 Block-Based Programming
+- Intuitive drag-and-drop interface
+- Color-coded block categories (Motion, Looks, Control)
+- Snap-together blocks that connect logically
+
+### 🐱 Multiple Sprite Support
+- Choose from various character sprites (Cat, Jerry, Mickey)
+- Each sprite maintains its own code blocks
+- Easy sprite switching with visual selector
+
+### 🎬 Live Animation Engine
+- Real-time execution of block sequences
+- Visual feedback as code runs
+- Interactive preview panel
+
+### ⚡ Advanced Interactions
+- Collision detection between sprites
+- Speech and thought bubbles
+- Customizable movement patterns
+
+### 🎨 User-Friendly Interface
+- Clean, intuitive layout inspired by Scratch
+- Responsive design that works across devices
+- Beginner-friendly with no coding experience required
 
 ---
 
@@ -55,14 +79,6 @@ If you encounter issues with missing modules like babel-loader:
    # Kill the process (replace PID with the actual process ID)
    kill -9 PID
    ```
-
-## Project Structure
-
-- `src/` - Source code
-  - `components/` - React components
-  - `Assets/` - Images and other assets
-- `public/` - Static files
-- `webpack.*.js` - Webpack configuration files
 
 ## Technologies Used
 
