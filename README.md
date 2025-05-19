@@ -7,7 +7,7 @@
 
 A lightweight, React-based visual coding platform inspired by MIT Scratch. Built for the Juspay Frontend Challenge.
 
-![Project Screenshot](https://gulshan-mit-scratch-clone-gulshan-singhs-projects-b3fca0ca.vercel.app/screenshot.png)
+![Project Screenshot](https://github.com/user-attachments/assets/578453c3-d00e-4914-973d-548b4b0d5472)
 
 ---
 
