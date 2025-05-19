@@ -1,53 +1,63 @@
-# Scratch-Style Programming Environment
+# Scratch Starter Project
 
-A visual programming environment inspired by Scratch, built with React and Tailwind CSS.
+A Scratch-like block programming interface built with React and webpack.
 
 ## Features
 
-- Drag-and-drop block-based programming
-- Multiple sprite support with collision detection
-- Motion, looks, and control blocks
-- Visual feedback for collisions with sound effects
-- Real-time execution of code blocks
+- Drag-and-drop block programming interface
+- Multiple sprite support
+- Visual execution of code blocks
+- Collision detection between sprites
+- Custom block types for movement, appearance, and control flow
 
-## Collision Detection
+## Getting Started
 
-This project includes a robust collision detection system:
+### Prerequisites
 
-- Sprites detect collisions with other sprites using AABB (Axis-Aligned Bounding Box) collision detection
-- Visual feedback includes:
-  - Red ring around colliding sprites
-  - Shake animation
-  - "COLLISION!" text overlay
-  - Sound effect
-- Collision events are logged to the console for debugging
+- Node.js (v14 or higher recommended)
+- npm or pnpm
 
-## Debugging Collisions
+### Installation
 
-To debug collision issues:
-1. Open your browser's developer console
-2. Look for logs with "COLLISION DETECTED!" in red
-3. Collision logs include sprite positions, bounding boxes, and distances
-4. State updates are also logged when collisions occur
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/scratch-starter-project.git
+   cd scratch-starter-project
+   ```
 
-## Development
+2. Install dependencies:
+   ```
+   npm install
+   ```
+   
+   Or if using pnpm:
+   ```
+   pnpm install
+   ```
 
-### Getting Started
+3. Start the development server:
+   ```
+   npm start
+   ```
+   
+   Or with pnpm:
+   ```
+   pnpm start
+   ```
 
-```bash
-# Install dependencies
-npm install
+4. Open your browser and navigate to `http://localhost:3001`
 
-# Start development server
-npm run dev
-```
+## Project Structure
 
-### Project Structure
+- `src/` - Source code
+  - `components/` - React components
+  - `Assets/` - Images and other assets
+- `public/` - Static files
+- `webpack.*.js` - Webpack configuration files
 
-- `src/components/` - React components
-- `src/components/utils/` - Utility functions including collision detection
-- `src/Assets/` - Images and other assets
+## Technologies Used
 
-## License
-
-This project is open source and available under the MIT License.
+- React
+- Tailwind CSS
+- Webpack
+- ReScript (optional) 
