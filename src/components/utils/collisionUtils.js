@@ -39,8 +39,8 @@ export function getCollisionPoint(sprite1, sprite2) {
 
 // Constants for collision handling
 export const COLLISION_CONSTANTS = {
-  PAUSE_DURATION: 200, // Reduced for more responsive feedback
-  COOLDOWN_DURATION: 400, // Reduced to allow more frequent collisions
+  PAUSE_DURATION: 500, // Increased for more noticeable effect
+  COOLDOWN_DURATION: 800, // Increased to prevent too frequent collisions
   SPRITE_SIZE: 32,
 };
 
@@ -64,20 +64,32 @@ export function checkAABBCollision(sprite1, sprite2) {
     s1Bottom > s2Top
   );
 
-  // Debug collision check
-  console.log('Collision Check:', {
-    sprite1: {
-      id: sprite1.id,
-      pos: sprite1.position,
-      bounds: { left: s1Left, right: s1Right, top: s1Top, bottom: s1Bottom }
-    },
-    sprite2: {
-      id: sprite2.id,
-      pos: sprite2.position,
-      bounds: { left: s2Left, right: s2Right, top: s2Top, bottom: s2Bottom }
-    },
-    isColliding
-  });
+  // Calculate distance between sprites (center to center)
+  const distance = Math.sqrt(
+    Math.pow(sprite1.position.x - sprite2.position.x, 2) +
+    Math.pow(sprite1.position.y - sprite2.position.y, 2)
+  );
+
+  // Enhanced debug collision check - only log actual collisions to reduce spam
+  if (isColliding) {
+    console.log('%c COLLISION DETECTED! ', 'background: red; color: white; font-weight: bold;');
+    console.log('Collision Check:', {
+      sprite1: {
+        id: sprite1.id,
+        name: sprite1.name || 'Unknown',
+        pos: sprite1.position,
+        bounds: { left: s1Left, right: s1Right, top: s1Top, bottom: s1Bottom }
+      },
+      sprite2: {
+        id: sprite2.id,
+        name: sprite2.name || 'Unknown',
+        pos: sprite2.position,
+        bounds: { left: s2Left, right: s2Right, top: s2Top, bottom: s2Bottom }
+      },
+      distance,
+      isColliding
+    });
+  }
 
   return isColliding;
 }

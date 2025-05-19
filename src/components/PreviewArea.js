@@ -12,6 +12,38 @@ import {
   COLLISION_STYLES 
 } from './utils/collisionUtils';
 
+// Create collision sound
+const createCollisionSound = () => {
+  let audioContext = null;
+  
+  return () => {
+    try {
+      // Initialize AudioContext on first use (needs user interaction)
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.type = 'sine';
+      oscillator.frequency.setValueAtTime(220, audioContext.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+      
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.start();
+      oscillator.stop(audioContext.currentTime + 0.2);
+    } catch (error) {
+      console.warn('Audio error:', error);
+    }
+  };
+};
+
 export default function PreviewArea() {
   const { state: dragState } = useDrag();
   const { state: execState, executeBlocks, executeAllSprites, stopAllExecutions } = useExecution();
@@ -19,6 +51,10 @@ export default function PreviewArea() {
   const { sprites, activeSprite, showImagePicker, pendingSpriteId } = spriteState;
   const previewAreaRef = useRef(null);
   const animationFrameRef = useRef(null);
+  const playCollisionSoundRef = useRef(null);
+
+  // Initialize collision sound
+  const playCollisionSound = useRef(createCollisionSound()).current;
 
   // State for tracking sprite motion
   const [movingSprites, setMovingSprites] = useState(new Map());
@@ -62,6 +98,9 @@ export default function PreviewArea() {
             hasCollision = true;
             collisionDirection = calculateBounceDirection(sprite, otherSprite);
 
+            // Play collision sound
+            playCollisionSound();
+
             // Set collision state for both sprites
             spriteDispatch({
               type: 'SET_SPRITE_COLLISION_STATE',
@@ -102,13 +141,30 @@ export default function PreviewArea() {
           position: sprite.lastPosition,
           direction: collisionDirection
         });
-        console.log('Dispatched UPDATE_SPRITE_POSITION', spriteId, sprite.lastPosition, collisionDirection);
+        // Only log position updates occasionally to reduce spam
+        if (Math.random() < 0.05) { // Log ~5% of updates
+          console.log('Dispatched UPDATE_SPRITE_POSITION', spriteId, sprite.lastPosition, collisionDirection);
+        }
 
         // Pause movement
         setTimeout(() => {
-          updatedSprites.set(spriteId, {
+          // After pause, set new motion with proper direction
+          const newMotion = {
             ...motion,
-            remainingSteps: motion.remainingSteps * -1 // Reverse remaining steps
+            remainingSteps: Math.abs(motion.remainingSteps) * 0.7, // Reduce energy after collision
+            direction: collisionDirection
+          };
+          
+          console.log('Resuming after collision with new direction:', collisionDirection);
+          
+          // Apply the new motion
+          updatedSprites.set(spriteId, newMotion);
+          
+          // Also update the sprite's direction visually
+          spriteDispatch({
+            type: 'UPDATE_SPRITE_POSITION',
+            spriteId,
+            direction: collisionDirection
           });
         }, COLLISION_CONSTANTS.PAUSE_DURATION);
       } else {
@@ -119,7 +175,10 @@ export default function PreviewArea() {
           position: { x: newX, y: newY },
           motionStep: motion.remainingSteps
         });
-        console.log('Dispatched UPDATE_SPRITE_POSITION', spriteId, { x: newX, y: newY }, motion.remainingSteps);
+        // Only log position updates occasionally to reduce spam
+        if (Math.random() < 0.05) { // Log ~5% of updates
+          console.log('Dispatched UPDATE_SPRITE_POSITION', spriteId, { x: newX, y: newY }, motion.remainingSteps);
+        }
 
         // Update remaining steps
         updatedSprites.set(spriteId, {
@@ -135,7 +194,10 @@ export default function PreviewArea() {
 
     // Continue animation if sprites are still moving
     if (hasMovingSprites) {
-      console.log('updateSpritePositions called', Array.from(movingSprites.keys()));
+      // Only log occasionally to reduce spam
+      if (Math.random() < 0.1) { // Log ~10% of animation frames
+        console.log('updateSpritePositions called', Array.from(movingSprites.keys()));
+      }
       animationFrameRef.current = requestAnimationFrame(updateSpritePositions);
     }
   }, [sprites, movingSprites, spriteDispatch]);
@@ -309,12 +371,15 @@ export default function PreviewArea() {
       <div ref={previewAreaRef} className="flex-1 relative bg-gray-50">
         {/* Render all sprites */}
         {sprites.map(sprite => {
-          console.log('Rendering sprite', sprite.id, sprite.position, sprite.direction, sprite.isColliding);
+          // Only log occasionally to reduce spam
+          if (Math.random() < 0.02) { // Log ~2% of renders
+            console.log('Rendering sprite', sprite.id, sprite.position, sprite.direction, sprite.isColliding);
+          }
           return (
             sprite.isVisible && (
               <div
                 key={sprite.id}
-                className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-200 cursor-move
+                className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-200 cursor-move shake-container
                   ${sprite.id === activeSprite ? 'ring-2 ring-blue-500 ring-opacity-50' : ''}
                   ${sprite.isDragging ? 'z-10' : 'z-0'}
                   ${execState.executingSprites.has(sprite.id) ? 'ring-2 ring-green-500 ring-opacity-50' : ''}
