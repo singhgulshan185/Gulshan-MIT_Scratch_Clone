@@ -13,31 +13,34 @@ A lightweight, React-based visual coding platform inspired by MIT Scratch. Built
 
 ## 🚀 Features
 
-### 🧱 Block-Based Programming
-- Intuitive drag-and-drop interface
-- Color-coded block categories (Motion, Looks, Control)
-- Snap-together blocks that connect logically
+### 🎮 Motion Animations
+- `Move [X] steps`
+- `Turn [X] degrees`
+- `Go to x: [X], y: [Y]`
+- `Repeat [block]` loop under Controls
 
-### 🐱 Multiple Sprite Support
-- Choose from various character sprites (Cat, Jerry, Mickey)
-- Each sprite maintains its own code blocks
-- Easy sprite switching with visual selector
+### 😃 Looks Animations
+- `Say [message] for [X] seconds`
+- `Think [message] for [X] seconds`
 
-### 🎬 Live Animation Engine
-- Real-time execution of block sequences
-- Visual feedback as code runs
-- Interactive preview panel
+### 🧩 Drag-and-Drop Blocks
+- All blocks are draggable and snap together like in Scratch
+- Seamless block programming experience
 
-### ⚡ Advanced Interactions
-- Collision detection between sprites
-- Speech and thought bubbles
-- Customizable movement patterns
+### 🧸 Multiple Sprites Support
+- Create and manage multiple sprites
+- Each sprite can run its own set of animation blocks
+- Global **Play** button to trigger all animations at once
 
-### 🎨 User-Friendly Interface
-- Clean, intuitive layout inspired by Scratch
-- Responsive design that works across devices
-- Beginner-friendly with no coding experience required
-
+### 🦸 Hero Feature: Collision-Based Animation Swap
+- When two sprites collide, their animations dynamically swap
+  - Example:  
+    - Sprite A: Move 10 steps  
+    - Sprite B: Move -10 steps  
+    - On collision:  
+      - Sprite A: Move -10 steps  
+      - Sprite B: Move 10 steps  
+- Brings interactive game-like logic to the platform
 ---
 
 ## 🛠️ Tech Stack
